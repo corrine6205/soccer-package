@@ -1,0 +1,127 @@
+#' Plot the age distribution of the team
+#'
+#' @param data A dataset containing player information with a column named "age".
+#' @import ggplot2
+#' @keywords plotting
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   plot_age(data)
+#' }
+plot_age <- function(data) {
+  # Plot the age distribution using ggplot2
+  ggplot(data, aes(x = age)) +
+    geom_histogram(binwidth = 1, fill = "darkorchid1", color = "black") +
+    labs(x = "Age", y = "Frequency", title = "Age Distribution of the Team") +
+    theme_minimal()
+}
+
+
+
+
+
+#' Plot the total goals per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "goals".
+#' @import ggplot2
+#' @keywords plotting
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   plot_total_goals(data)
+#' }
+plot_total_goals <- function(data) {
+  # Calculate the total goals per position
+  total_goals <- aggregate(goals ~ position, data = data, FUN = sum)
+
+  # Plot the total goals per position using ggplot2
+  ggplot(total_goals, aes(x = position, y = goals)) +
+    geom_bar(stat = "identity", fill = "violetred1") +
+    labs(x = "Position", y = "Total Goals", title = "Total Goals per Position") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+
+
+
+
+
+#' Plot the total fouls committed per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_committed".
+#' @import ggplot2
+#' @keywords plotting
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   plot_total_fouls(data)
+#' }
+plot_total_fouls_committed <- function(data) {
+  # Calculate the total fouls committed per position
+  total_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = sum)
+
+  # Plot the total fouls committed per position using ggplot2
+  ggplot(total_fouls, aes(x = position, y = fouls_committed)) +
+    geom_bar(stat = "identity", fill = "mediumspringgreen", color = "black") +
+    labs(x = "Position", y = "Total Fouls Committed", title = "Total Fouls Committed per Position") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+
+
+
+
+#' Plot the total fouls suffered per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_suffered".
+#' @import ggplot2
+#' @keywords plotting
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   plot_total_fouls_suffered(data)
+#' }
+plot_total_fouls_suffered <- function(data) {
+  # Calculate the total fouls suffered per position
+  total_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = sum)
+
+  # Plot the total fouls suffered per position using ggplot2
+  ggplot(total_fouls, aes(x = position, y = fouls_suffered)) +
+    geom_bar(stat = "identity", fill = "deeppink1", color = "black") +
+    labs(x = "Position", y = "Total Fouls Suffered", title = "Total Fouls Suffered per Position") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+
+
+
+
+#' Plot the total offsides per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "offsides".
+#' @import ggplot2
+#' @keywords plotting
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   plot_total_offsides(data)
+#' }
+plot_total_offsides <- function(data) {
+  # Calculate the total offsides per position
+  total_offsides <- aggregate(offsides ~ position, data = data, FUN = sum)
+
+  # Plot the total offsides per position using ggplot2
+  ggplot(total_offsides, aes(x = position, y = offsides)) +
+    geom_bar(stat = "identity", fill = "violet", color = "black") +
+    labs(x = "Position", y = "Total Offsides", title = "Total Offsides per Position") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
