@@ -1,0 +1,79 @@
+#' Calculate the total goals per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "goals".
+#' @return A dataset containing the total goals scored for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   total_goals(data)
+#' }
+total_goals <- function(data) {
+  # Calculate the total goals per position
+  total_goals <- aggregate(goals ~ position, data = data, FUN = sum)
+
+  return(total_goals)
+}
+
+
+
+
+
+#' Calculate the total fouls committed per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_committed".
+#' @return A dataset containing the total fouls committed for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   total_fouls_committed(data)
+#' }
+total_fouls_committed <- function(data) {
+  # Calculate the total fouls committed per position
+  total_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = sum)
+
+  return(total_fouls)
+}
+
+
+
+
+
+#' Calculate the total fouls suffered per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_suffered".
+#' @return A dataset containing the total fouls suffered for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   total_fouls_suffered(data)
+#' }
+total_fouls_suffered <- function(data) {
+  # Calculate the total fouls suffered per position
+  total_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = sum)
+
+  return(total_fouls)
+}
+
+
+
+
+
+#' Calculate the total offsides per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "offsides".
+#' @return A dataset containing the total offsides committed for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   total_offsides(data)
+#' }
+total_offsides <- function(data) {
+  # Calculate the total offsides per position
+  total_offsides <- aggregate(offsides ~ position, data = data, FUN = sum)
+
+  return(total_offsides)
+}
