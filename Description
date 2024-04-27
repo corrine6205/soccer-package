@@ -1,0 +1,16 @@
+Package: soccer
+Type: Package
+Title: Soccer Team Stats
+Version: 0.0.0.9000
+Author: Corrine Costello <corrince@usf.edu>
+Maintainer: Corrine Costello <corrince@usf.edu>
+Description: Comparing different statistics between position on a single soccer team. Averages, totals, and plots are calculated and created.  There is also a ratio for shots vs. shots on target.
+The package contains a dataset consisting of different stats of the GothamFC soccer team and its players.  In it can be found the players name, age, position, goals, shots, shots_on_target, fouls_committed, fouls_suffered, offsides, yellow_cards, and red_cards.
+Imports: ggplot2
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
