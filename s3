@@ -1,0 +1,1 @@
+#' Because "export" was used within the Roxygen2 syntax, all functions are classified as S3 methods.
