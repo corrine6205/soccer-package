@@ -1,0 +1,104 @@
+#' Calculate the average age of a soccer team from a dataset
+#'
+#' @param data A dataset containing player information with a column named "age".
+#' @return The average age of the soccer team.
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   avg_age(data)
+#' }
+#'
+avg_age <- function(data) {
+  # Calculate the average age
+  average_age <- mean(data$age, na.rm = TRUE)
+
+  # Print the result
+  cat("Average age of the team is:", average_age, "years\n")
+
+  # Return the average age
+  return(average_age)
+}
+
+
+
+
+
+#' Calculate the average goals per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "goals".
+#' @return A dataset containing the average goals scored for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   avg_goals(data)
+#' }
+avg_goals <- function(data) {
+  # Calculate the average goals per position
+  avg_goals <- aggregate(goals ~ position, data = data, FUN = mean)
+
+  return(avg_goals)
+}
+
+
+
+
+
+#' Calculate the average fouls committed per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_committed".
+#' @return A dataset containing the average fouls committed for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   avg_fouls_committed(data)
+#' }
+avg_fouls_committed <- function(data) {
+  # Calculate the average fouls committed per position
+  avg_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = mean)
+
+  return(avg_fouls)
+}
+
+
+
+
+
+#' Calculate the average fouls suffered per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "fouls_suffered".
+#' @return A dataset containing the average fouls suffered for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   avg_fouls_suffered(data)
+#' }
+avg_fouls_suffered <- function(data) {
+  # Calculate the average fouls suffered per position
+  avg_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = function(x) round(mean(x), 2))
+
+  return(avg_fouls)
+}
+
+
+
+
+
+#' Calculate the average offsides per position (forward, defender, midfielder, goalkeeper)
+#'
+#' @param data A dataset containing player information with columns named "position" and "offsides".
+#' @return A dataset containing the average offsides committed for each position.
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Example usage:
+#'   avg_offsides(data)
+#' }
+avg_offsides <- function(data) {
+  # Calculate the average offsides per position
+  avg_offsides <- aggregate(offsides ~ position, data = data, FUN = function(x) round(mean(x), 2))
+
+  return(avg_offsides)
+}
