@@ -1,0 +1,21 @@
+#' Calculate the ratio between shots and shots on target for a specific player
+#'
+#' This function calculates the ratio between the total number of shots and
+#' the total number of shots on target for a specific player in a soccer dataset.
+#'
+#' @param data A data frame containing soccer player statistics with columns
+#'   for "name", "shots", and "shots_on_target".
+#' @param player_name The name of the player for whom the shot ratio is calculated.
+#' @return A data frame with the shot ratio for the specified player.
+#' @export
+#'
+shots_ratio <- function(data, player_name) {
+  # Filter the data for the specific player
+  specific_player <- data[data$name == player_name, ]
+
+  # Calculate the ratio for the specific player
+  shots_ratio <- specific_player$shots / specific_player$shots_on_target
+
+  # Return the shot ratio value
+  return(shots_ratio)
+}
