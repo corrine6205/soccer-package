@@ -1,1 +1,389 @@
+library(testthat)
+library(soccer)
 
+test_that("Test avg_fouls_suffered function", {
+  # Test code
+  avg_fouls_suffered <- function(data) {
+    # Calculate the average fouls suffered per position
+    avg_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = function(x) round(mean(x), 2))
+
+    return(avg_fouls)
+  }
+
+  # Perform expectations
+  # Define the expected output with rounded values
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    fouls_suffered = c(1.88, 1.20, 0.00, 3.33) # Rounded to 2 decimal places
+  )
+
+  # Calculate the actual output
+  avg_fouls_suffered_actual <- avg_fouls_suffered(soccer)
+
+  # Perform the expectation
+  expect_equal(round(avg_fouls_suffered_actual$fouls_suffered, 2), expected_output$fouls_suffered)
+})
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test avg_goals function", {
+  # Test code
+  avg_goals <- function(data) {
+    # Calculate the average goals per position
+    avg_goals <- aggregate(goals ~ position, data = data, FUN = mean)
+
+    return(avg_goals)
+  }
+
+  # Perform expectations
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    goals = c(0.0, 0.4, 0.0, 0.0)
+  )
+
+  # Calculate the actual output
+  avg_goals_actual <- avg_goals(soccer)
+
+  # Perform the expectation
+  expect_equal(avg_goals_actual, expected_output)
+})
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test avg_offsides function", {
+  # Test code
+  avg_offsides <- function(data) {
+    # Calculate the average offsides per position
+    avg_offsides <- aggregate(offsides ~ position, data = data, FUN = function(x) round(mean(x), 2))
+
+    return(avg_offsides)
+  }
+
+  # Perform expectations
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    offsides = c(0.0, 0.8, 0.0, 0.17) # Rounded to 2 decimal places
+  )
+
+  # Calculate the actual output
+  avg_offsides_actual <- avg_offsides(soccer)
+
+  # Perform the expectation
+  expect_equal(round(avg_offsides_actual$offsides, 2), expected_output$offsides)
+})
+
+
+
+
+
+library(testthat)
+library(soccer)
+library(ggplot2)
+
+test_that("Test plot_age function", {
+  # Test code
+  plot_age <- function(data) {
+    # Plot the age distribution using ggplot2
+    ggplot(data, aes(x = age)) +
+      geom_histogram(binwidth = 1, fill = "darkorchid1", color = "black") +
+      labs(x = "Age", y = "Frequency", title = "Age Distribution of the Team") +
+      theme_minimal()
+  }
+
+  # Perform the expectation
+  expect_that(plot_age(soccer), is_a("ggplot"))
+  })
+
+
+
+
+
+
+library(testthat)
+library(soccer)
+library(ggplot2)
+
+test_that("Test plot_total_fouls_committed function", {
+  # Test code
+  plot_total_fouls_committed <- function(data) {
+    # Calculate the total fouls committed per position
+    total_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = sum)
+
+    # Plot the total fouls committed per position using ggplot2
+    ggplot(total_fouls, aes(x = position, y = fouls_committed)) +
+      geom_bar(stat = "identity", fill = "mediumspringgreen", color = "black") +
+      labs(x = "Position", y = "Total Fouls Committed", title = "Total Fouls Committed per Position") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  }
+
+  # Perform the expectation
+  expect_that(plot_total_fouls_committed(soccer), is_a("ggplot"))
+  })
+
+
+
+
+
+library(testthat)
+library(soccer)
+library(ggplot2)
+
+test_that("Test plot_total_goals function", {
+  # Test code
+  plot_total_goals <- function(data) {
+    # Calculate the total goals per position
+    total_goals <- aggregate(goals ~ position, data = data, FUN = sum)
+
+    # Plot the total goals per position using ggplot2
+    ggplot(total_goals, aes(x = position, y = goals)) +
+      geom_bar(stat = "identity", fill = "violetred1") +
+      labs(x = "Position", y = "Total Goals", title = "Total Goals per Position") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  }
+
+  # Perform the expectation
+  expect_that(plot_total_goals(soccer), is_a("ggplot"))
+  })
+
+
+
+
+
+library(testthat)
+library(soccer)
+library(ggplot2)
+
+test_that("Test plot_total_offsides function", {
+  # Test code
+  plot_total_offsides <- function(data) {
+    # Calculate the total offsides per position
+    total_offsides <- aggregate(offsides ~ position, data = data, FUN = sum)
+
+    # Plot the total offsides per position using ggplot2
+    ggplot(total_offsides, aes(x = position, y = offsides)) +
+      geom_bar(stat = "identity", fill = "violet", color = "black") +
+      labs(x = "Position", y = "Total Offsides", title = "Total Offsides per Position") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  }
+
+  # Perform the expectation
+  expect_that(plot_total_offsides(soccer), is_a("ggplot"))
+})
+
+
+
+
+
+library(testthat)
+library(soccer)
+library(ggplot2)
+
+test_that("Test plot_total_fouls_suffered function", {
+  # Test code
+  plot_total_fouls_suffered <- function(data) {
+    # Calculate the total fouls suffered per position
+    total_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = sum)
+
+    # Plot the total fouls suffered per position using ggplot2
+    ggplot(total_fouls, aes(x = position, y = fouls_suffered)) +
+      geom_bar(stat = "identity", fill = "deeppink1", color = "black") +
+      labs(x = "Position", y = "Total Fouls Suffered", title = "Total Fouls Suffered per Position") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  }
+
+  # Perform the expectation
+  expect_that(plot_total_fouls_suffered(soccer), is_a("ggplot"))
+  })
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test shots_ratio function", {
+  shots_ratio <- function(data, player_name) {
+    # Filter the data for the specific player
+    specific_player <- data[data$name == player_name, ]
+
+    # Calculate the ratio for the specific player
+    shots_ratio <- specific_player$shots / specific_player$shots_on_target
+
+    # Return the shot ratio value
+    return(shots_ratio)
+  }
+
+  # Define the expected shot ratio value
+  expected_shot_ratio <- 1.6
+
+  # Calculate the actual shot ratio value for a specific player
+  actual_shot_ratio <- shots_ratio(soccer, "Esther_Gonzalez")
+
+  # Perform the expectation
+  expect_equal(actual_shot_ratio, expected_shot_ratio)
+})
+
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test total_fouls_suffered function", {
+  # Test code
+  total_fouls_suffered <- function(data) {
+    # Calculate the total fouls suffered per position
+    total_fouls <- aggregate(fouls_suffered ~ position, data = data, FUN = sum)
+
+    return(total_fouls)
+  }
+
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    fouls_suffered = c(15, 6, 0, 20)
+  )
+
+  # Calculate the actual output
+  total_fouls_suffered_actual <- total_fouls_suffered(soccer)
+
+  # Perform the expectation
+  expect_equal(total_fouls_suffered_actual, expected_output)
+  })
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test total_fouls_committed function", {
+  # Test code
+  total_fouls_committed <- function(data) {
+    # Calculate the total fouls committed per position
+    total_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = sum)
+
+    return(total_fouls)
+  }
+
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    fouls_committed = c(15, 8, 0, 22)
+  )
+
+  # Calculate the actual output
+  total_fouls_committed_actual <- total_fouls_committed(soccer)
+
+  # Perform the expectation
+  expect_equal(total_fouls_committed_actual, expected_output)
+})
+
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test total_offsides", {
+  # Test code
+  total_offsides <- function(data) {
+    # Calculate the total offsides per position
+    total_offsides <- aggregate(offsides ~ position, data = data, FUN = sum)
+
+    return(total_offsides)
+  }
+
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    offsides = c(0, 4, 0, 1)
+  )
+
+  # Calculate the actual output
+  total_offsides_actual <- total_offsides(soccer)
+
+  # Perform the expectation
+  expect_equal(total_offsides_actual, expected_output)
+})
+
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test total_goals", {
+  # Test code
+  total_goals <- function(data) {
+    # Calculate the total goals per position
+    total_goals <- aggregate(goals ~ position, data = data, FUN = sum)
+
+    return(total_goals)
+  }
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    goals = c(0, 2, 0, 0)  # Replace with your expected values
+  )
+
+  # Calculate the actual output
+  total_goals_actual <- total_goals(soccer)
+
+  # Perform the expectation
+  expect_equal(total_goals_actual, expected_output)
+})
+
+
+
+
+
+library(testthat)
+library(soccer)
+
+test_that("Test avg_fouls_committed function", {
+  # Test code
+  avg_fouls_committed <- function(data) {
+    # Calculate the average fouls committed per position
+    avg_fouls <- aggregate(fouls_committed ~ position, data = data, FUN = mean)
+
+    return(avg_fouls)
+  }
+
+  # Perform expectations
+  # Define the expected output
+  expected_output <- data.frame(
+    position = c("Defender", "Forward", "Goalkeeper", "Midfielder"),
+    fouls_committed = c(1.875, 1.6, 0, 3.6666667)
+  )
+
+  # Calculate the actual output
+  avg_fouls_actual <- avg_fouls_committed(soccer)
+
+  # Perform the expectation
+  expect_equal(avg_fouls_actual, expected_output)
+})
